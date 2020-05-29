@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>一生所爱</title>
+    <!-- 新 Bootstrap4 核心 CSS 文件 -->
+    <link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
+    <script src="/webjars/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="/css/font.css" th:href="@{/css/font.css}"/>
+    <link rel="stylesheet" href="/css/hovereffect.css" th:href="@{/css/hovereffect.css}">
+</head>
+<body style="background-image: url('/img/lovecc.jpg');background-repeat: no-repeat;background-size: cover;">
+<div class="container-fluid" style="position: fixed;height: 100%">
+    <div class="hovereffect col-md-12">
+        <div class="overlay">
+            <h2>一生所爱！</h2>
+            <a class="info" href="/login" th:href="@{/login}">点击进入</a>
+        </div>
+    </div>
+    <div th:insert="~{footer::footer}" style="position: fixed;bottom: 0px" class="col-md-12 font"></div>
+</div>
+<!--<div th:fragment="logout" sec:authorize="isAuthenticated()">
+    登录用户:<span sec:authentication="name"></span>
+    用户角色:<span sec:authentication="principal.authorities"></span>
+    <div>
+        <form action="#" th:action="@{/logout}" method="post">
+            <input type="submit" value="登出">
+        </form>
+    </div>
+</div>-->
+<!--<div style="background-image: url('/img/into.jpg');background-repeat: no-repeat;background-size: cover;"></div>-->
+
+<!--<a href="/login" th:href="@{/login}"><img class="img-thumbnail" alt="点击进入" src="/img/into.jpg" width="205" height="111"></a>-->
+
+
+
+
+</body>
+</html>

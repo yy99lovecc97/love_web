@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- 新 Bootstrap4 核心 CSS 文件 -->
+    <link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
+    <script src="/webjars/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("input[name=onlyId]").focusout(function () {
+                var s = $("input[name=onlyId]").val();
+                console.log(s);
+                //alert("数据: \n" + s);
+                /*$.post("/checkOnlyId",JSON.stringify({only_id:s}),function (data,status) {
+                    if (status === 200) {
+                        console.log(status);
+                    } else {
+                        console.log(status);
+                    }
+                });*/
+                if (s==null||s=="") {
+                    $("#only").html("唯一码为空").show();
+                }else {
+                    $.ajax({
+                        type: "post",
+                        url:"/checkOnlyId",
+                        contentType:"application/json;charset=UTF-8",
+                        data:JSON.stringify({onlyId:s}),
+                        //dataType:"json",
+                        success:function (data) {
+                            console.log(data.message+"分开"+data.status);
+                            if (data.message){
+                                $("#only").html("唯一码已存在").show();
+                                /*定义及用法：html()方法返回被选元素的内容，即括号内未设置参数。
+                                若设置参数，返回设置参数的内容。
+                                并且该参数内容覆盖所有想匹配的元素的内容
+                                参数可为函数，即function(index,dcontent)
+                                --index可选，接收选择器的 index 位置。
+                                --dcontent可选，接收选择器的当前内容。*/
+                            }else {
+                                $("#only").html("唯一码可用").show();
+                            }
+                        }
+                    })
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="card-header bg-info text-white text-center">欢迎使用~一生所爱~</div>
+    <div class="card-body col-md-6 offset-md-3">
+        <form action="#" th:action="@{/registerUI}"method="post" th:method="post">
+            <div class="form-group">
+                <label for="username">用户名:</label>
+                <input type="text" id="username" name="username" class="form-control" autofocus="autofocus" autocomplete="off">
+                <span style="color: red" th:if="${#fields.hasErrors('user.username')}" th:errors="${user.username}"></span>
+            </div>
+            <div class="form-group">
+                <label for="password">密码:</label>
+                <input type="password" id="password" name="password" class="form-control">
+                <span style="color: red" th:if="${#fields.hasErrors('user.password')}" th:errors="${user.password}"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="onlyId">专属码:</label>
+                <input type="text" id="onlyId" name="onlyId" autocomplete="off" class="form-control">
+                <!--<textarea id="only_id" name="only_id" readonly="readonly" rows="1" style="resize: none;background: transparent;border-style: none"></textarea>-->
+                <!--<script>
+                    function uuid(len, radix) {
+                        var chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('');
+                        var uuid = [], i;
+                        radix = radix || chars.length;
+
+                        if (len) {
+                            // Compact form
+                            for (i = 0; i < len; i++) uuid[i] = chars[0 | Math.random()*radix];
+                        } else {
+                            // rfc4122, version 4 form
+                            var r;
+
+                            // rfc4122 requires these characters
+                            uuid[8] = uuid[13] = uuid[18] = uuid[23] = '-';
+                            uuid[14] = '4';
+
+                            // Fill in random data. At i==19 set the high bits of clock sequence as
+                            // per rfc4122, sec. 4.1.5
+                            for (i = 0; i < 36; i++) {
+                                if (!uuid[i]) {
+                                    r = 0 | Math.random()*16;
+                                    uuid[i] = chars[(i == 19) ? (r & 0x3) | 0x8 : r];
+                                }
+                            }
+                        }
+                        return uuid.join('');
+                    }
+                    document.getElementById("only_id").innerHTML = uuid(8,16);
+                </script>-->
+                <!--<p id="only_id"></p>-->
+                <span id="only" style="display: none"></span>
+                <span style="color: red" th:if="${#fields.hasErrors('user.onlyId')}" th:errors="${user.onlyId}"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="usTime">纪念日:</label>
+                <input type="text" id="usTime" name="usTime" autocomplete="off" class="form-control">
+                <span th:if="${#fields.hasErrors('user.usTime')}" th:errors="${user.usTime}"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="email">email:</label>
+                <input type="text" id="email" name="email" autocomplete="off" class="form-control">
+                <span style="color: red" th:if="${#fields.hasErrors('user.email')}" th:errors="${user.email}"></span>
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="customRadio" name="sex" value="女">
+                <label class="custom-control-label" for="customRadio">女</label>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="customRadio2" name="sex" checked="true" value="男">
+                <label class="custom-control-label" for="customRadio2">男</label>
+            </div>
+
+            <div class="form-group">
+                <div class="offset-md-5">
+                    <button type="submit" class="btn btn-info">提交</button>
+                    <button type="reset" class="btn btn-danger">重置</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    </div>
+</div>
+
+<!--<ul th:if="${#fields.hasErrors('*')}">
+    <li th:each="err : ${#fields.errors('*')}" th:text="${err}">Input is incorrect</li>
+</ul>-->
+
+<div th:include="~{footer::footer}"></div>
+</body>
+</html>

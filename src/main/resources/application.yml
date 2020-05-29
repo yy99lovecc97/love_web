@@ -1,0 +1,63 @@
+spring:
+  devtools:
+    restart:
+      enabled: true
+  thymeleaf:
+    cache: false
+    encoding: UTF-8
+    mode: HTML5
+  datasource:
+    url: jdbc:mysql://localhost/lovecc?serverTimezone=UTC&characterEncoding=utf8&characterSetResults=utf8
+    username: root
+    password: 117881
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    #��ʼ������
+    initialSize: 5
+
+    #��С��������
+    minIdle: 5
+
+    #�����������
+    maxActive: 20
+
+    #��ʱ�ȴ�ʱ�䣨���룩
+    maxWait: 60000
+
+    #ÿ60������һ�ο������ӻ�����
+    timeBetweenEvictionRunsMillis: 60000
+
+    #���е����ӿ���5���Ӻ󱻻���
+    minEvictableIdleTimeMillis: 300000
+
+    #��֤ʹ�õ�SQL���
+    validationQuery: SELECT 1
+
+    #ָ�������Ƿ񱻿������ӻ�����(�����)���м���.������ʧ��,�����ӽ����ӳ���ȥ��.
+    testWhileIdle: true
+
+    #�������ʱ��Ҫ���ԣ������Ӱ������
+    testOnBorrow: false
+
+    #��Ӧ��ʹ�������ӣ����ӳػ������ӵ�ʱ����жϸ������Ƿ񻹿��á�
+    testOnReturn: false
+
+    #�Ƿ񻺴�preparedStatement��Ҳ����PSCache��PSCache��֧���α�����ݿ����������޴󣬱���˵oracle����mysql�½���رա�
+    #��PSCache������ָ��ÿ��������PSCache�Ĵ�С
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 20
+
+    #   ���ü��ͳ�����ص�filters��ȥ�����ؽ���sql�޷�ͳ�ƣ�'wall'���ڷ���ǽ
+    #�����������ַ�����ͨ�������ķ�ʽ������չ��������õĲ���У�
+    #���ͳ���õ�filter:stat��־�õ�filter:log4j����sqlע���filter:wall
+    filters: stat
+
+    #�ϲ����DruidDataSource�ļ������
+    useGlobalDataSourceStat: true
+    # ͨ��connectProperties��������mergeSql���ܣ���SQL��¼
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect

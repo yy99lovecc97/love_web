@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>登录界面</title>
+    <!-- 新 Bootstrap4 核心 CSS 文件 -->
+    <link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
+    <script src="/webjars/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-header bg-info text-white text-center">欢迎使用~一生所爱~</div>
+        <div class="card-body col-md-6 offset-md-3">
+            <form th:action="@{/login}" method="post">
+                <div class="form-group">
+                    <label for="username">用户名:</label>
+                    <input type="text" id="username" name="username" class="form-control" autofocus="autofocus" autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="password">密码:</label>
+                    <input type="password" id="password" name="password" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="vercodee">验证码:</label>
+                    <input type="text" class="form-control" id="vercodee" name="vercodee" autocomplete="off">
+                    <img name="d" src="/authImg" title="看不清可单击刷新图片" onclick="this.src=this.src+'?'+Math.random()">
+                </div>
+                <div class="form-group">
+                    <div class="offset-md-5">
+                        <button type="submit" class="btn" onclick="return f()">提交</button>
+                        <button type="button" class="btn"><a class="nav-link" th:href="@{/register}" href="/register">无注册码，注册</a></button>
+                        <button type="button" class="btn"><a class="nav-link" th:href="@{/registerHas}" href="/registerHas">已有注册码，注册</a></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div th:include="~{footer::footer}"></div>
+</div>
+<!--<span th:text="${session.rand}"></span>
+<div id="rand" th:text="${session.rand}"></div>-->
+
+<script type="text/javascript">
+    function f() {
+        var vercode1 = document.getElementById("vercodee").innerText;
+        var vercode2 = document.getElementById("rand").innerText;
+        if(!((vercode1.toLowerCase()).equals(vercode2.toLowerCase()))){
+            window.alert("验证码输入错误"+vercode1+"vercode2"+vercode2);
+            vercodee.focus();
+            return false;
+        }
+        return true;
+    }
+</script>
+</body>
+</html>
