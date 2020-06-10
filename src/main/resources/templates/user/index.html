@@ -34,18 +34,30 @@
             </li>
 
             <!-- Dropdown -->
-            <li id="limou" class="nav-item dropdown">
-                <a  class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+            <li class="nav-item dropdown">
+                <a  class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
                     Dropdown link
                 </a>
-                <div id="div1" class="dropdown-menu">
+                <div class="dropdown-menu">
                     <a class="dropdown-item" href="#">Link 1</a>
                     <a class="dropdown-item" href="#">Link 2</a>
                     <a class="dropdown-item" href="#">Link 3</a>
                 </div>
             </li>
-            <li class="nav-item col-md-1 offset-md-6">
-                <a class="nav-link" href="#"><span sec:authentication="name"></span></a>
+
+            <li class="nav-item col-md-1 offset-md-6 dropdown">
+                <a  class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+                    <span sec:authentication="name"></span>
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">个人信息</a>
+                    <a class="dropdown-item" href="#">
+                        <form action="#" th:action="@{/logout}" method="post">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <button type="submit" class="btn btn-info btn-sm">登出</button>
+                        </form>
+                    </a>
+                </div>
             </li>
         </ul>
     </nav>

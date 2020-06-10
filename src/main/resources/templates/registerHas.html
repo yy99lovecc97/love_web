@@ -13,6 +13,19 @@
 
     <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
     <script src="/webjars/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="jedate1/skin/jedate.css">
+    <script type="text/javascript" src="jedate1/src/jedate.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            //或者为这样的
+            jeDate("#usTime",{
+                theme:{ bgcolor:"#00A1CB",color:"#ffffff", pnColor:"#00CCFF"},
+                format:"YYYY-MM-DD",
+                isTime:false,
+                minDate:"2014-09-19 00:00:00"
+            })
+        });
+    </script>
 </head>
 <body>
 <div class="container-fluid">
@@ -70,7 +83,7 @@
 
             <div class="form-group">
                 <label for="usTime">纪念日:</label>
-                <input type="text" id="usTime" name="usTime" autocomplete="off" class="form-control">
+                <input type="text" id="usTime" name="usTime" autocomplete="off" class="form-control" placeholder="请选择"  readonly>
                 <span th:if="${#fields.hasErrors('user.usTime')}" th:errors="${user.usTime}"></span>
             </div>
 
@@ -91,8 +104,9 @@
 
             <div class="form-group">
                 <div class="offset-md-5">
-                    <button type="submit" class="btn btn-info">提交</button>
+                    <button type="submit" class="btn btn-info">注册</button>
                     <button type="reset" class="btn btn-danger">重置</button>
+                    <button type="button" class="btn"><a class="nav-link" th:href="@{/index}" href="/index">返回</a></button>
                 </div>
             </div>
         </form>

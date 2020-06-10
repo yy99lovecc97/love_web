@@ -1,4 +1,30 @@
 spring:
+  mail:
+    #配置mail
+    host: smtp.163.com
+    username: lovecc0915@163.com
+    password: lovecc0915
+    protocol: smtp
+    default-encoding: UTF-8
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    #消息确认
+    publisher-confirms: true
+    #虚拟主机
+    virtual-host: /
+    #消息返回
+    publisher-returns: true
+    cache:
+      channel:
+        #channel的缓存数量
+        size: 25
+    #连接超时
+    connection-timeout: 60000
+
   devtools:
     restart:
       enabled: true
